@@ -34,7 +34,11 @@
 <link rel="stylesheet" href="http://localhost/citagro.com.gt/public/bower_components/fullcalendar/dist/fullcalendar.min.css">
 <link rel="stylesheet" href="http://localhost/citagro.com.gt/public/bower_components/fullcalendar/dist/fullcalendar.print.css" media="print">
 
-  <!-- Google Font -->
+<!-- select -->
+<link rel="stylesheet" href="http://localhost/citagro.com.gt/public/bower_components/select2/dist/css/select2.min.css">
+
+
+<!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini login-page">
@@ -114,6 +118,9 @@
 <script src="http://localhost/citagro.com.gt/public/bower_components/moment/moment.js"></script>
 
 
+<!-- select -->
+<script src="http://localhost/clinica-l8/public/bower_components/select2/dist/js/select2.js"></script>
+
 
 <script type="text/javascript">
 
@@ -141,6 +148,9 @@
   }
 
   });
+
+// select
+$('#select2').select2();
 
 </script>
 
@@ -227,6 +237,14 @@ Swal.fire({
 })
 </script>
 
+
+<?php
+
+$exp = explode("/", $_SERVER["REQUEST_URI"]);
+
+?>
+@if($exp[3] == "Citas")
+
 <script type="text/javascript">
   var date = new Date();
   var d = date.getDate(),
@@ -236,17 +254,107 @@ Swal.fire({
   $('#calendario').fullCalendar(
     {
       defaultView: 'agendaWeek',
-    // ocultar dias en el calendario
-      hiddenDays: [0,6],
+      diffenDays : [0,7],
 
-      //horarios
-      scrollTime: "08:00",
-      minTime: "08:00",
-      maxTime: "16:00"
+      events:[
+        @foreach($citas as $cita)
 
-    }
-  );
+        @if(auth()->user()->rol == "Doctor")
+{
+          id: '{{ $cita->id }}',
+          title: '{{ $cita->PAC->name }}',
+          start: '{{ $cita->FyHinicio }}',
+          end: '{{ $cita->FyHfinal }}',
+},
+          @endif
+
+
+        @endforeach
+      ],
+
+      @if($horarios != null)
+
+        scrollTime: "{{ $hora->horaInicio }}",
+        minTime: "{{ $hora->horaInicio }}",
+        maxTime: "{{ $hora->horaFin }}",
+
+      @else
+
+        scrollTime: null,
+        minTime: null,
+        maxTime: null,
+
+      @endif
+
+
+      dayClick:function(date,jsEvent,view){
+
+        var fecha = date.format();
+
+        var hora = ("01:00:00").split(":");
+
+        fecha = fecha.split("T");
+
+        var hora1 = (fecha[1].split(":"));
+
+        HI = parseFloat(hora1[0])
+        HA = parseFloat(hora[0])
+
+        var horaFinal = HI + HA;
+
+        if(horaFinal < 10 && horaFinal > 0){
+
+          var HF = "0"+horaFinal+":00:00";
+        }else{
+          var HF = horaFinal + ":00:00";
+        }
+
+        //no citar dias antes
+        n = new Date();
+        y = n.getFullYear();
+        m = n.getMonth() + 1;
+        d = n.getDate();
+
+        if(m < 10){
+          M = "0"+m;
+          if(d < 10){
+            D = 0 + d;
+
+            diaActual = y +"-"+M+"-"+D;
+          }else{
+            diaActual = y +"-"+M+"-"+d;
+          }
+
+        }if(diaActual <= fecha[0]){
+          $('#CitaModal').modal();
+        }
+
+        $('#Fecha').val(fecha[0]);
+        $('#Hora').val(hora1[0]+":00:00");
+        $('#FyHinicio').val(fecha[0]+" "+hora1[0]+":00:00");
+        $('#FyHfinal').val(fecha[0]+" "+HF);
+
+      },
+
+      eventClick:function(calEvent,jsEvent, view){
+
+
+        if("{{ auth()->user()->rol }}" == "Doctor"){
+
+          $('#EventoModal').modal();
+
+
+        }
+
+
+          $('#paciente').html(calEvent.title);
+      
+      
+        }
+
+    });
 </script>
+@endif
 
 </body>
 </html>

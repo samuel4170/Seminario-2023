@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Citas extends Model
 {
     use HasFactory;
+    protected $table = 'citas';
+
+    protected $fillable = [
+        'id_doctor', 'id_paciente', 'FyHinicio', 'FyHfinal'
+    ];
+
+    public $timestamps = false;
+
+    // obtener el nombre del paciente
+    public function PAC()
+    {
+        return $this->belongsTo(Pacientes::class, 'id_paciente');
+    }
+    
 }
