@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StartController;
 use App\Http\Controllers\OfficesController;
 use App\Http\Controllers\DoctorsController;
+use App\Http\Controllers\PatientsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,5 +44,6 @@ Route::get('Doctors',[DoctorsController::class, 'index']);
 
 Route::post('Doctors', [DoctorsController::class, 'store']);
 
-// Delete
 Route::get('Delete-Doctor/{id}', [DoctorsController::class, 'destroy']);
+
+Route::get('Patients',[PatientsController::class, 'index']);

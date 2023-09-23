@@ -66,46 +66,6 @@ class DoctorsController extends Controller
         return redirect('Doctors')->with('registered_successfully', 'true'); //variable de sesion para mostrar alertas interactivas
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Doctors  $doctors
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Doctors $doctors)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Doctors  $doctors
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Doctors $doctors)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Doctors  $doctors
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Doctors $doctors)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Doctors  $doctors
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         DB::table('users')->whereId($id)->delete();
