@@ -42,3 +42,6 @@ Route::delete('Office/{id}', [OfficesController::class, 'destroy']);
 Route::get('Doctors',[DoctorsController::class, 'index']);
 
 Route::post('Doctors', [DoctorsController::class, 'store']);
+
+// Delete
+Route::get('Delete-Doctor/{id}', [DoctorsController::class, 'destroy']);

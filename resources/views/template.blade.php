@@ -118,7 +118,8 @@
         </script>
     @endif
     <script>
-        $('.table').on('click', '.deleteDoctorBtn', ()=>{
+        $('.table').on('click', '.deleteDoctorBtn', function(){
+            let DoctorId = $(this).attr('DoctorId');
             Swal.fire({
                 title: '¿Realmente deseas eliminar el registro?',
                 icon: 'warning',
@@ -127,11 +128,11 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Sí, eliminar'
-            }).then(result)=>{
-                if(result.isConfirm){
-                    window.location = "Doctors"
+            }).then((result)=>{
+                if(result.isConfirmed){
+                    window.location = "Delete-Doctor/" + DoctorId;
                 }
-            }
+            })
         })
     </script>
 

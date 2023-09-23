@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Offices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class DoctorsController extends Controller
 {
@@ -105,8 +106,9 @@ class DoctorsController extends Controller
      * @param  \App\Models\Doctors  $doctors
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Doctors $doctors)
+    public function destroy($id)
     {
-        //
+        DB::table('users')->whereId($id)->delete();
+        return redirect('Doctors');
     }
 }

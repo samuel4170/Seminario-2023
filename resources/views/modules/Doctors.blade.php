@@ -51,7 +51,7 @@
                                         <td> Aún no registrado. </td>
                                     @endif
                                     <td>
-                                        <button class="btn btn-danger deleteDoctorBtn">
+                                        <button class="btn btn-danger deleteDoctorBtn" DoctorId="{{ $doctor -> id }}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
