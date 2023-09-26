@@ -76,12 +76,6 @@ class CitasController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Citas  $citas
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Citas $citas)
     {
         //
@@ -95,6 +89,8 @@ class CitasController extends Controller
 
     public function destroy(Citas $citas)
     {
-        //
+        DB::table('citas')->whereId(request('idCita'))->delete();
+
+        return redirect('Citas/'.request('idDoctor'));
     }
 }

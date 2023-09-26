@@ -42,11 +42,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini login-page">
+<div class="wrapper">
+</div>
 
 @if(Auth::user())
-
-<div class="wrapper">
-
   @include('modulos.cabecera')
 
   @if(auth()->user()->rol == "Secretaria")
@@ -61,8 +60,6 @@
 
   @yield('content')
   
-  </div>
-
 @else
 
   @yield('contenido')
@@ -119,7 +116,7 @@
 
 
 <!-- select -->
-<script src="http://localhost/clinica-l8/public/bower_components/select2/dist/js/select2.js"></script>
+<script src="http://localhost/citagro.com.gt/public/bower_components/select2/dist/js/select2.js"></script>
 
 
 <script type="text/javascript">
@@ -209,9 +206,6 @@ $('.table').on('click','.EliminarPaciente',function(){
   })
 
 })
-
-
-
 
 
 $('.table').on('click','.EliminarDoctor',function(){
@@ -338,22 +332,22 @@ $exp = explode("/", $_SERVER["REQUEST_URI"]);
 
       eventClick:function(calEvent,jsEvent, view){
 
-
         if("{{ auth()->user()->rol }}" == "Doctor"){
 
           $('#EventoModal').modal();
 
-
         }
 
+        $('#paciente').html(calEvent.title);
+        $('#idCita').val(calEvent.id);
 
-          $('#paciente').html(calEvent.title);
-      
-      
-        }
+
+      }
 
     });
+
 </script>
+
 @endif
 
 </body>

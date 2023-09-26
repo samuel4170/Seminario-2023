@@ -74,27 +74,6 @@
 
          </div>
 
-         <!-- <div class="col-lg-3 col-xs-6">
-         
-         <div class="small-box bg-red">
-
-             <div class="inner">
-                 <h3>Administrador</h3>
-
-                 <p>Inicie Sesion</p>
-             </div>
-
-             <div class="icon">
-                 <i class="fa fa-male"></i>
-             </div>
-
-                 <a href="Ingresar" class="small-box-footer">
-                     Ingresar <i class="fa fa-arrow-circle-right"></i>
-                 </a>
-
-             </div>
-
-         </div> -->
     </div>
 
 

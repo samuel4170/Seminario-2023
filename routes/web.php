@@ -17,7 +17,7 @@ Route::get('/Ingresar', function () {
     return view('modulos.Ingresar');
 });
 
-Auth::routes();
+Auth::routes(); 
 
 Route::get('Inicio', [InicioController::class, 'Index']);
 
@@ -47,3 +47,4 @@ Route::get('Citas/{id}',[CitasController::class, 'index']);
 Route::post('Horario',[CitasController::class, 'HorarioDoctor']);
 Route::put('editar-horario/{id}',[CitasController::class, 'EditarHorario']);
 Route::post('Citas/{id_doctor}',[CitasController::class, 'CrearCita']);
+Route::delete('borrar-cita',[CitasController::class, 'destroy']);

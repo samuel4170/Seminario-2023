@@ -1,4 +1,4 @@
-<header class="main-header">
+<!-- <header class="main-header">
     <a href="{{ url('Start') }}" class="logo">
         <span class="logo-mini"><b>CGT</b></span>
         <span class="logo-lg"><b>CITAGROVET</b></span>
@@ -34,15 +34,15 @@
             </ul>
         </div>
     </nav>
-</header>
+</header> -->
 
 
-<!-- <header class="main-header">
+ <header class="main-header">
 
     <a href="{{ url('Inicio') }}" class="logo">
 
         <span class="logo-mini"><b>CGV</b></span>
-        <span class="logo-lg"><b> CitaGroVet</b></span>    
+        <span class="logo-lg"><b>CitaGroVet</b></span>    
     </a>
 
     <nav class="navbar navbar-static-top">
@@ -59,7 +59,7 @@
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                {{ auth()->user()->name}}
+                {{ auth()->user()->name }}
 
                 <span class="hidden-xs"></span>
                 </a>
@@ -88,4 +88,4 @@
 
     </div>
     </nav>
-</header> -->
+</header>

@@ -137,28 +137,40 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Pedir Cita</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <div>
+                </div>
 
             </form>
 
         </div>
 
     </div>
-
 </div>
 
-<!-- eliminar / cancelr -->
+<!-- eliminar / cancelr --> 
 <div class="modal fade" id="EventoModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" action="">
+            <form method="post" action="{{ url('borrar-cita')}}">
+                @csrf
+                @method('delete')
 
                 <div class="modal-body">
                     <div class="form-group">
                         <h2>Paciente:</h2>
                         <h4 id="paciente"></h4>
+
+                        <input type="hidden" name="idCita" id="idCita">
+
+                        <?php
+                            $exp = explode("/", $_SERVER["REQUEST_URI"]);
+
+                            echo '<input type="hidden" name="idDoctor" value="'.$exp[4].'">';
+
+                        ?>
+
                     </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning">Cancelar Cita</button>
                     <button type="button" data-dismiss="modal" class="btn btn-danger">Cerrar</button>

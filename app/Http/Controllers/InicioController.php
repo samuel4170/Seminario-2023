@@ -27,57 +27,30 @@ class InicioController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Inicio  $inicio
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Inicio $inicio)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Inicio  $inicio
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Inicio $inicio)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Inicio  $inicio
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Inicio $inicio)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Inicio  $inicio
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Inicio $inicio)
     {
         //
