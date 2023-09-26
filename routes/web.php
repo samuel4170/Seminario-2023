@@ -6,6 +6,7 @@ use App\Http\Controllers\StartController;
 use App\Http\Controllers\OfficesController;
 use App\Http\Controllers\DoctorsController;
 use App\Http\Controllers\PatientsController;
+use App\Http\Controllers\SpeciesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,15 @@ Route::post('Doctors', [DoctorsController::class, 'store']);
 Route::get('Delete-Doctor/{id}', [DoctorsController::class, 'destroy']);
 
 Route::get('Patients',[PatientsController::class, 'index']);
+
+Route::get('Create-Patients',[PatientsController::class, 'create']);
+
+Route::get('Species',[SpeciesController::class, 'index']); //Vista principal del module.species
+
+Route::post('Species',[SpeciesController::class, 'store']); //method=post del new-modal-species
+
+Route::get('Delete-Specie/{id}', [SpeciesController::class, 'destroy']); //funcion ejecutada al confirmar la accion en template.blade.php
+
+Route::get('Edit-Specie/{id}', [SpeciesController::class, 'show']); // Mostrar ventana modal edit con datos actuales
+
+Route::put('Update-Specie/{id}', [SpeciesController::class, 'update']); // Accion de actualizar como tal con los datos actuales

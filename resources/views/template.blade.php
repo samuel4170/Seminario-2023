@@ -108,6 +108,7 @@
     </script>
     {{-- SWEET ALERT 2 --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {{-- Mensaje de operaciones exitosas --}}
     @if(session('registered_successfully'))
         <script>
             Swal.fire(
@@ -117,7 +118,18 @@
             )
         </script>
     @endif
+    {{-- Mensaje por errores a nivel de base de datos --}}
+    @if(session('error_db_handler'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: session('error_message')
+            })
+        </script>
+    @endif
     <script>
+        //Ventana interactiva para eliminar registros de doctor
         $('.table').on('click', '.deleteDoctorBtn', function(){
             let DoctorId = $(this).attr('DoctorId');
             Swal.fire({
@@ -134,6 +146,51 @@
                 }
             })
         })
+
+        //Ventana interactiva para eliminar registros de especies
+        $('.table').on('click', '.btn-delete-specie', function(){
+            let SpecieId = $(this).attr('SpecieId');
+            Swal.fire({
+                title: '¿Realmente deseas eliminarlo?',
+                text: 'Esto podría causar daños en el sistema y pérdida de registros existentes',
+                icon: 'warning',
+                showDenyButton: true,
+                denyButtonText: 'Cancelar',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar'
+            }).then((result)=>{
+                if(result.isConfirmed){
+                    window.location = "Delete-Specie/" + SpecieId;
+                }else if(result.isDenied){
+                    Swal.fire({
+                        text: 'Se ha mantenido el registro.',
+                        icon: 'info',
+                        confirmButtonText: 'De acuerdo'
+                    });
+                }
+            })
+        })
+    </script>
+
+    {{-- Se desmenuza la url --}}
+    <?php
+        $exp = explode('/', $_SERVER['REQUEST_URI']);
+    ?>
+
+    {{-- Al momento de que la URL diga "Edit-Specie", significa que se esta trayendo un ID para edicion, se muestra elmodal con los datos --}}
+    @if($exp[3] == 'Edit-Specie')
+        <script type="text/javascript">
+            $(document).ready(()=>{
+                $('#edit-modal-specie').modal('toggle');
+            })
+        </script>
+    @endif
+    {{-- Es necesario @volver atras, si el usuario abre la ventana de edicion pero no edita el registro como tal --}}
+    <script>
+        $('#edit-modal-specie').on('hidden.bs.modal', function (e) {
+            history.back();
+        });
     </script>
 
 </body>

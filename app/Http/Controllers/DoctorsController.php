@@ -6,7 +6,7 @@ use App\Models\Doctors;
 use App\Http\Controllers\Controller;
 use App\Models\Offices;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash; //aplicar encriptacion de data en password
 use Illuminate\Support\Facades\DB;
 
 class DoctorsController extends Controller

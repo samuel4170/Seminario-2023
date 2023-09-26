@@ -25,10 +25,6 @@ class PatientsController extends Controller
         if ((auth()->user()->role != "Administrador" && auth()->user()->role != "Secretaria" && auth()->user()->role != 'Doctor')) {
             return redirect('Start');//Si el rol del usuaario no es de administrador o secretaria, se le redirecciona
         }
-        // Traer los datos necesarios para crear un Doctor
-        //$offices = Offices::all();
-        // Trea los datos necesarios para mostrar los Doctores registrados
-        //$doctors = Doctors::all();
         //Si es un usuario que debe de tener acceso al modulo, entones retornar la vista correspondiente
         return view('modules.Patients');
     }
@@ -40,7 +36,8 @@ class PatientsController extends Controller
      */
     public function create()
     {
-        //
+        //Si es un usuario que debe de tener acceso al modulo, entones retornar la vista correspondiente
+        return view('modules.Patients-Create');
     }
 
     /**

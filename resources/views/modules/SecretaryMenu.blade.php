@@ -19,10 +19,16 @@
                     <span>Doctores</span>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="{{ url('Patients') }}">
                     <i class="fa fa-users"></i>
                     <span>Pacientes</span>
+                </a>
+            </li> --}}
+            <li>
+                <a href="{{ url('Species') }}">
+                    <i class="fa fa-users"></i>
+                    <span>Mantenimiento | Especies</span>
                 </a>
             </li>
         </ul>
