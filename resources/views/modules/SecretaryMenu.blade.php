@@ -43,6 +43,12 @@
                     <span>Mantenimiento | Colors</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ url('Medicines') }}">
+                    <i class="fa fa-users"></i>
+                    <span>Mantenimiento | Medicamentos</span>
+                </a>
+            </li>
         </ul>
     </section>
 </aside>

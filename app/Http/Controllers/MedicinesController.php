@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Colors;
+use App\Models\Medicines;
 use App\Http\Controllers\Controller;
+use App\Models\Species;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
-class ColorsController extends Controller
+class MedicinesController extends Controller
 {
-    // Indica que solo pueden acceder a este modulo usuarios autenticados
     public function __construct()
 	{
 		$this->middleware('auth');
@@ -28,9 +28,9 @@ class ColorsController extends Controller
             return redirect('Start'); //Si el rol del usuaario no es de administrador o secretaria, se le redirecciona
         }
         // Trea los datos necesarios para mostrar los registros
-        $colors = Colors::all();
+        $medicines = Medicines::all();
         //Si es un usuario que debe de tener acceso al modulo, entones retornar la vista correspondiente
-        return view('modules.Colors')->with('colors', $colors);
+        return view('modules.Medicines')->with('medicines', $medicines);
     }
 
     /**
@@ -53,19 +53,21 @@ class ColorsController extends Controller
     {
         // Se validan los campos
         $data = request()->validate([
-            'name' => ['required', 'string', 'min:3', 'unique:colors']
+            'name' => ['required', 'string', 'min:3', 'unique:medicines'],
+            'price' => ['required', 'numeric']
         ]);
-        //Despues de haber validado los datos, crear el registro como tal
-        Colors::create([
+        //Despues de haber validado los datos, crear el registro como tal enviando todos los datos
+        Medicines::create([
             'name' => $data['name'],
+            'price' => $data['price']
         ]);
-        return redirect('Colors')->with('registered_successfully', 'true'); // variable de sesion operacion OK
+        return redirect('Medicines')->with('registered_successfully', 'true'); // variable de sesion operacion OK
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Colors  $colors
+     * @param  \App\Models\Medicines  $medicines
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -75,19 +77,19 @@ class ColorsController extends Controller
             return redirect('Start'); //Si el rol del usuaario no es de administrador o secretaria, se le redirecciona
         }
         // Trea los datos necesarios para mostrar los registros
-        $colors = Colors::all();
-        $colorX = Colors::find($id); //el id que esta en la url
+        $medicines = Medicines::all();
+        $medicineX = Medicines::find($id); //el id que esta en la url
         //Si es un usuario que debe de tener acceso al modulo, entones retornar la vista correspondiente
-        return view('modules.Colors-edit', compact('colors', 'colorX'));
+        return view('modules.Medicines-edit', compact('medicines', 'medicineX'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Colors  $colors
+     * @param  \App\Models\Medicines  $medicines
      * @return \Illuminate\Http\Response
      */
-    public function edit(Colors $colors)
+    public function edit(Medicines $medicines)
     {
         //
     }
@@ -96,38 +98,45 @@ class ColorsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Colors  $colors
+     * @param  \App\Models\Medicines  $medicines
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Colors $id)
+    public function update(Request $request, Medicines $id)
     {
-        //Se valida que el valor actual sea diferente del nuevo valor que se esta enviando
-        if($id['name'] != $request['name']){
+        //No siempre se van a cambiar los dos valores, a veces solo se va a cambiar el precio pero no el nombre y viceversa
+        if($id['price'] != $request['price']){// Cuando se cambia el precio
             // Se validan los campos
             $data = request()->validate([
-                'name' => ['required', 'string', 'min:3', 'unique:colors']
+                'price' => ['required', 'numeric']
             ]);
-            DB::table('colors')->where('id', $id['id'])->update(['name' => $data['name']]);
+            DB::table('medicines')->where('id', $id['id'])->update(['price' => $data['price']]);
         }
-        return redirect('Colors')->with('update_successfully', 'true');
+        if($id['name'] != $request['name']){//Si se cambia el nombre
+            // Se validan los campos
+            $data = request()->validate([
+                'name' => ['required', 'string', 'min:3', 'unique:medicines'],
+            ]);
+            DB::table('medicines')->where('id', $id['id'])->update(['name' => $data['name']]);
+        }
+        return redirect('Medicines')->with('update_successfully', 'true');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Colors  $colors
+     * @param  \App\Models\Medicines  $medicines
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         try {
-            // Código para eliminar @colors
-            Colors::destroy($id);
+            // Código para eliminar @medicamento
+            Medicines::destroy($id);
             // Si todo sale OK, redireccionar con mensaje exitoso
-            return redirect('Colors')->with('delete_successfully', 'true');
+            return redirect('Medicines')->with('delete_successfully', 'true');
 
         } catch (QueryException $e) { //Posibles errores: el dato que se va a eliminar se referencia en otras tablas
-            return redirect('Colors')->with('delete_unsuccessfully', 'true');
+            return redirect('Medicines')->with('delete_unsuccessfully', 'true');
         }
     }
 }

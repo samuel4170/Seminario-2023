@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StartController;
 use App\Http\Controllers\OfficesController;
 use App\Http\Controllers\DoctorsController;
+use App\Http\Controllers\MedicinesController;
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\SpeciesController;
 
@@ -85,3 +86,14 @@ Route::get('Delete-Color/{id}', [ColorsController::class, 'destroy']); //funcion
 Route::get('Edit-Color/{id}', [ColorsController::class, 'show']); // Mostrar ventana modal edit con datos actuales
 
 Route::put('Update-Color/{id}', [ColorsController::class, 'update']); //Accion de actualizar como tal, con datos nuevos que envia el usuario
+
+// MEDICINE / MEDICAMENTOS
+Route::get('Medicines',[MedicinesController::class, 'index']); // Vista principal del module.colros
+
+Route::post('Medicines',[MedicinesController::class, 'store']); // method=post del new-modal-colors
+
+Route::get('Delete-Medicine/{id}', [MedicinesController::class, 'destroy']); //funcion ejecutada al confirmar la accion en template.blade.php
+
+Route::get('Edit-Medicine/{id}', [MedicinesController::class, 'show']); // Mostrar ventana modal edit con datos actuales
+
+Route::put('Update-Medicine/{id}', [MedicinesController::class, 'update']); //Accion de actualizar como tal, con datos nuevos que envia el usuario
