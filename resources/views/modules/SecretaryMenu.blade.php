@@ -31,6 +31,12 @@
                     <span>Mantenimiento | Especies</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ url('Breeds') }}">
+                    <i class="fa fa-users"></i>
+                    <span>Mantenimiento | Razas</span>
+                </a>
+            </li>
         </ul>
     </section>
 </aside>

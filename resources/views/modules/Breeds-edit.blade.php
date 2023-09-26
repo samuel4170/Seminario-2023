@@ -51,24 +51,31 @@
         </div>
     </section>
 </div>
-{{-- Modal New --}}
-<div class="modal fade" id="new-modal-breed" tabindex="-1" aria-labelledby="new-label-breed">
+{{-- Modal Edit --}}
+<div class="modal fade" id="edit-modal-breed" tabindex="-1" aria-labelledby="edit-label-breed">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="new-label-breed"><i class="fa fa-plus-circle"></i> Registrar Raza</h4>
+            <h4 class="modal-title" id="edit-label-breed"><i class="fa fa-plus-circle"></i> Actualizar Raza</h4>
         </div>
         <div class="modal-body">
-        {{-- No es necesario el action, basta con agregar method=post para que lo gestione web.php --}}
-            <form method="post" autocomplete="off">
+            <form method="post" autocomplete="off" action="{{ url('Update-Breed/'. $breedX -> id) }}">
                 @csrf
+                @method('put')
                 {{-- Select para especificar la especie de la raza --}}
                 <div class="form-group">
                     <label for="id_specie" class="form-label">Especie:</label>
                     <select name="id_specie" id="id_specie" class="form-control" required>
                         @foreach ($species as $specie)
-                            <option value="{{ $specie -> id }}">{{ $specie -> name}}</option>
+                            {{-- Si el id de la especie que estamos recorriendo, es igual al id actual de la especie que tiene la raza --}}
+                            @if ($specie -> id == $breedX -> id_specie)
+                                {{-- Entonces le asignamos la propiedad "selected" para que aparezca seleccionada esa opcion por default --}}
+                                <option value="{{ $specie -> id }}" selected>{{ $specie -> name}}</option>
+                            @else
+                                {{-- Caso contrario no se le agrega dicha propiedad --}}
+                                <option value="{{ $specie -> id }}">{{ $specie -> name}}</option>
+                            @endif
                         @endforeach
                     </select>
                     <small id="id_specieHelp" class="form-text text-muted">¿A que especie pertenece la raza?</small>
@@ -78,8 +85,8 @@
                 </div>
                 <div class="form-group">
                     <label for="name" class="form-label">Nombre:</label>
-                    <input type="text" name="name" id="name" class="form-control" required value="{{ old('name') }}">
-                    <small id="nameHelp" class="form-text text-muted">¿Qué raza desea registrar?</small>
+                    <input type="text" name="name" id="name" class="form-control" required value="{{ $breedX -> name }}">
+                    <small id="nameHelp" class="form-text text-muted">¿Cómo vas a nombrar esta raza a partir de ahora?</small>
                     @error('name')
                         <div class="alert alert-danger">Es posible que ya se haya registrado esta raza.</div>
                     @enderror
@@ -87,8 +94,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-
+                    <button type="submit" class="btn btn-success"><i class="fa fa-pencil"></i> Actualizar</button>
                 </div>
             </form>
         </div>

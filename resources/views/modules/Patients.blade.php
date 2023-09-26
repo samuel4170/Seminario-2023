@@ -25,7 +25,7 @@
                             <th>Documento</th>
                             <th>Email</th>
                             <th>Teléfono</th>
-                            <th>Editar | Borrar</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>

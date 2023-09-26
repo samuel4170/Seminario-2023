@@ -22,7 +22,7 @@
                         <tr>
                             <th>#</th>
                             <th>Especie</th>
-                            <th></th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,7 +64,7 @@
                 <div class="form-group">
                     <label for="name" class="form-label">Nombre:</label>
                     <input type="text" name="name" id="name" class="form-control" required value="{{ $specieX -> name }}">
-                    <small id="nameHelp" class="form-text text-muted">¿Cómo vas a nombrar esta especia ahora?</small>
+                    <small id="nameHelp" class="form-text text-muted">¿Cómo vas a nombrar esta especia a partir de ahora?</small>
                     @error('name')
                         <div class="alert alert-danger">Es posible que ya se haya registrado esta especie en el sistema.</div>
                     @enderror

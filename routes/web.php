@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BreedsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StartController;
@@ -60,3 +61,13 @@ Route::get('Delete-Specie/{id}', [SpeciesController::class, 'destroy']); //funci
 Route::get('Edit-Specie/{id}', [SpeciesController::class, 'show']); // Mostrar ventana modal edit con datos actuales
 
 Route::put('Update-Specie/{id}', [SpeciesController::class, 'update']); // Accion de actualizar como tal con los datos actuales
+
+Route::get('Breeds',[BreedsController::class, 'index']); // Vista principal del module.breeds
+
+Route::post('Breeds',[BreedsController::class, 'store']); // method=post del new-modal-breeds
+
+Route::get('Delete-Breed/{id}', [BreedsController::class, 'destroy']); //funcion ejecutada al confirmar la accion en template.blade.php
+
+Route::get('Edit-Breed/{id}', [BreedsController::class, 'show']); // Mostrar ventana modal edit con datos actuales
+
+Route::put('Update-Breed/{id}', [BreedsController::class, 'update']); // Accion de actualizar como tal con los datos nuevos que envia el usuario

@@ -108,51 +108,52 @@
     </script>
     {{-- SWEET ALERT 2 --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    {{-- Mensaje de operaciones exitosas --}}
+    {{-- Mensaje de operaciones de @registro exitosas --}}
     @if(session('registered_successfully'))
         <script>
             Swal.fire(
                 '¡Excelente!',
-                'Los datos han sido registrados correctamente',
+                'Los datos han sido REGISTRADOS correctamente',
                 'success'
             )
         </script>
     @endif
-    {{-- Mensaje por errores a nivel de base de datos --}}
-    @if(session('error_db_handler'))
+    {{-- Mensaje de operaciones de @eliminacion exitosa --}}
+    @if(session('delete_successfully'))
+        <script>
+            Swal.fire(
+                '¡Excelente!',
+                'Los datos han sido ELIMINADOS correctamente',
+                'success'
+            )
+        </script>
+    @endif
+    {{-- Mensaje de operaciones de @elimiacion fallida --}}
+    @if(session('delete_unsuccessfully'))
         <script>
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: session('error_message')
+                text: 'No fue posible ELIMINAR este registro.'
             })
         </script>
     @endif
+    {{-- Mensaje de operaciones de @actualizacion exitosa --}}
+    @if(session('update_successfully'))
+        <script>
+            Swal.fire(
+                '¡Excelente!',
+                'Los datos han sido ACTUALIZADOS correctamente',
+                'success'
+            )
+        </script>
+    @endif
     <script>
-        //Ventana interactiva para eliminar registros de doctor
-        $('.table').on('click', '.deleteDoctorBtn', function(){
-            let DoctorId = $(this).attr('DoctorId');
+        //Template para mensajes de eliminar registros
+        function templateConfirmDeleteMessage($path){
             Swal.fire({
-                title: '¿Realmente deseas eliminar el registro?',
-                icon: 'warning',
-                showCancelButton: true,
-                cancelButtonText: 'Cancelar',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar'
-            }).then((result)=>{
-                if(result.isConfirmed){
-                    window.location = "Delete-Doctor/" + DoctorId;
-                }
-            })
-        })
-
-        //Ventana interactiva para eliminar registros de especies
-        $('.table').on('click', '.btn-delete-specie', function(){
-            let SpecieId = $(this).attr('SpecieId');
-            Swal.fire({
-                title: '¿Realmente deseas eliminarlo?',
-                text: 'Esto podría causar daños en el sistema y pérdida de registros existentes',
+                title: '¿Deseas eliminar el registro?',
+                text: 'Esto podría causar daños en el sistema y pérdida de algunos datos.',
                 icon: 'warning',
                 showDenyButton: true,
                 denyButtonText: 'Cancelar',
@@ -161,24 +162,40 @@
                 confirmButtonText: 'Sí, eliminar'
             }).then((result)=>{
                 if(result.isConfirmed){
-                    window.location = "Delete-Specie/" + SpecieId;
+                    window.location = $path;
                 }else if(result.isDenied){
                     Swal.fire({
-                        text: 'Se ha mantenido el registro.',
+                        text: 'NO se ha eliminado el registro.',
                         icon: 'info',
                         confirmButtonText: 'De acuerdo'
                     });
                 }
             })
+        }
+        //Ventana interactiva para eliminar registros de @doctor
+        $('.table').on('click', '.deleteDoctorBtn', function(){
+            // Esta funcion recibe una ruta y el id del registro del boton que fue clickeado para confirmar la eliminacion
+            templateConfirmDeleteMessage("Delete-Doctor/" + $(this).attr('DoctorId'));
+        })
+        //Ventana interactiva para eliminar registros de @especies
+        $('.table').on('click', '.btn-delete-specie', function(){
+            // Esta funcion recibe una ruta y el id del registro del boton que fue clickeado para confirmar la eliminacion
+            templateConfirmDeleteMessage("Delete-Specie/" + $(this).attr('SpecieId'));
+        })
+        // Ventana interactiva para eliminar registro de @razas
+        $('.table').on('click', '.btn-delete-breed', function(){
+            // Esta funcion recibe una ruta y el id del registro del boton que fue clickeado para confirmar la eliminacion
+            templateConfirmDeleteMessage("Delete-Breed/" + $(this).attr('BreedId'));
         })
     </script>
 
-    {{-- Se desmenuza la url --}}
+    {{-- Se desmenuza la url gestionada por $_SEVER para validar las peticiones de edicion --}}
     <?php
         $exp = explode('/', $_SERVER['REQUEST_URI']);
     ?>
 
-    {{-- Al momento de que la URL diga "Edit-Specie", significa que se esta trayendo un ID para edicion, se muestra elmodal con los datos --}}
+    {{--    Cuando la URL tenga "Edit-Specie", hay intencion de edicion, se muestra el modal con los datos basados en el ID --}}
+    {{-- Modal con los datos actuales basados en el ID @Specie --}}
     @if($exp[3] == 'Edit-Specie')
         <script type="text/javascript">
             $(document).ready(()=>{
@@ -186,9 +203,25 @@
             })
         </script>
     @endif
-    {{-- Es necesario @volver atras, si el usuario abre la ventana de edicion pero no edita el registro como tal --}}
+    {{-- Es necesario @volver_atras, si el usuario abre la ventana de edicion pero no edita el registro como tal --}}
     <script>
         $('#edit-modal-specie').on('hidden.bs.modal', function (e) {
+            history.back();
+        });
+    </script>
+
+    {{-- Cuando la URL tenga "Edit-Breed", hay intencion de edicion  --}}
+    {{-- Se muestra el Modal con los datos actuales basados en el ID @Breed --}}
+    @if($exp[3] == 'Edit-Breed')
+        <script type="text/javascript">
+            $(document).ready(()=>{
+                $('#edit-modal-breed').modal('toggle');
+            })
+        </script>
+    @endif
+    {{-- Es necesario @volver_atras, si el usuario abre la ventana de edicion pero no edita el registro como tal --}}
+    <script>
+        $('#edit-modal-breed').on('hidden.bs.modal', function (e) {
             history.back();
         });
     </script>

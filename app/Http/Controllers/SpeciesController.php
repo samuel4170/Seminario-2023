@@ -88,7 +88,7 @@ class SpeciesController extends Controller
             ]);
             DB::table('species')->where('id', $id['id'])->update(['name' => $data['name']]);
         }
-        return redirect('Species');
+        return redirect('Species')->with('update_successfully', 'true');
     }
 
     /**
@@ -99,24 +99,14 @@ class SpeciesController extends Controller
      */
     public function destroy($id)
     {
-        $error_db_handler=true;
-        $error_message='';
         try {
-            // Código para eliminar la especie aquí
+            // Código para eliminar la @especie
             Species::destroy($id);
-            // Si todo sale OK, redireccionar
-            return redirect('Species');
+            // Si todo sale OK, redireccionar con mensaje exitoso
+            return redirect('Species')->with('delete_successfully', 'true');
 
-        } catch (QueryException $e) {//pero en caso de errores
-            if ($e->errorInfo[1] == 1451) {
-                // Este código de error (1451) indica una violación de integridad referencial
-                $error_message='No se puede eliminar la especie debido a relaciones dependientes.';
-                return redirect('Species', compact('error_db_handler', 'error_message'));
-            } else {
-                // Otro tipo de error de base de datos
-                $error_message='Error al eliminar la especie.';
-                return redirect('Species', compact('error_db_handler', 'error_message'));
-            }
+        } catch (QueryException $e) { //Posibles errores: el dato que se va a eliminar se referencia en otras tablas
+            return redirect('Species')->with('delete_unsuccessfully', 'true');
         }
     }
 }
