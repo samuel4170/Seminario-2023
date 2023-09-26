@@ -37,6 +37,12 @@
                     <span>Mantenimiento | Razas</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ url('Colors') }}">
+                    <i class="fa fa-users"></i>
+                    <span>Mantenimiento | Colors</span>
+                </a>
+            </li>
         </ul>
     </section>
 </aside>

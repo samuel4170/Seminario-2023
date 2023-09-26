@@ -2,7 +2,7 @@
 @section('content-logged-in')
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>Especies</h1>
+        <h1>Colores</h1>
     </section>
     <section class="content">
         <div class="box">
@@ -12,7 +12,7 @@
                     type="button"
                     class="btn btn-primary btn-lg"
                     data-toggle="modal"
-                    data-target="#new-modal-specie">
+                    data-target="#new-modal-color">
                     <i class="fa fa-plus-circle"></i> Nuevo Registro
                 </button>
             </div>
@@ -21,23 +21,23 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Especie</th>
+                            <th>Color</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $counter=1; ?>
-                        @foreach ($species as $specie)
+                        @foreach ($colors as $color)
                         <tr>
                             <td>{{$counter++}}</td>
-                            <td>{{$specie -> name}}</td>
+                            <td>{{$color -> name}}</td>
                             <td>
-                                <a href="{{ url('Edit-Specie/' . $specie -> id ) }}">
+                                <a href="{{ url('Edit-Color/' . $color -> id ) }}">
                                     <button class="btn btn-success" title="Actualizar">
                                         <i class="fa fa-pencil"></i>
                                     </button>
                                 </a>
-                                <button class="btn btn-danger btn-delete-specie" SpecieId="{{ $specie -> id }}" title="Eliminar">
+                                <button class="btn btn-danger btn-delete-color" SpecieId="{{ $color -> id }}" title="Eliminar">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>
@@ -49,30 +49,29 @@
         </div>
     </section>
 </div>
-{{-- Modal New --}}
-<div class="modal fade" id="new-modal-specie" tabindex="-1" aria-labelledby="new-label-specie">
+{{-- Modal Edit --}}
+<div class="modal fade" id="edit-modal-color" tabindex="-1" aria-labelledby="edit-label-color">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="new-label-specie"><i class="fa fa-plus-circle"></i> Registrar Especie</h4>
+            <h4 class="modal-title" id="edit-label-color">Actualizar Color</h4>
         </div>
         <div class="modal-body">
-        {{-- No es necesario el action, basta con agregar method=post para que lo gestione web.php --}}
-            <form method="post" autocomplete="off">
+            <form method="post" autocomplete="off" action="{{ url('Update-Color/'. $colorX -> id) }}">
                 @csrf
+                @method('put')
                 <div class="form-group">
                     <label for="name" class="form-label">Nombre:</label>
-                    <input type="text" name="name" id="name" class="form-control" required value="{{ old('name') }}">
-                    <small id="nameHelp" class="form-text text-muted">¿Qué especie desea registrar?</small>
+                    <input type="text" name="name" id="name" class="form-control" required value="{{ $colorX -> name }}">
+                    <small id="nameHelp" class="form-text text-muted">¿Cómo vas a nombrar este color a partir de ahora?</small>
                     @error('name')
-                        <div class="alert alert-danger">Es posible que ya se haya registrado esta especie.</div>
+                        <div class="alert alert-danger">Es posible que ya se haya registrado este color en el sistema.</div>
                     @enderror
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Guardar</button>
-
+                    <button type="submit" class="btn btn-success"><i class="fa fa-pencil"></i> Actualizar</button>
                 </div>
             </form>
         </div>

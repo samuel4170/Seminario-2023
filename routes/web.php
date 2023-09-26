@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BreedsController;
+use App\Http\Controllers\ColorsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StartController;
@@ -52,6 +53,7 @@ Route::get('Patients',[PatientsController::class, 'index']);
 
 Route::get('Create-Patients',[PatientsController::class, 'create']);
 
+// SPECIES / ESPECIES
 Route::get('Species',[SpeciesController::class, 'index']); //Vista principal del module.species
 
 Route::post('Species',[SpeciesController::class, 'store']); //method=post del new-modal-species
@@ -62,6 +64,7 @@ Route::get('Edit-Specie/{id}', [SpeciesController::class, 'show']); // Mostrar v
 
 Route::put('Update-Specie/{id}', [SpeciesController::class, 'update']); // Accion de actualizar como tal con los datos actuales
 
+// BREEDS / RAZAS
 Route::get('Breeds',[BreedsController::class, 'index']); // Vista principal del module.breeds
 
 Route::post('Breeds',[BreedsController::class, 'store']); // method=post del new-modal-breeds
@@ -70,4 +73,15 @@ Route::get('Delete-Breed/{id}', [BreedsController::class, 'destroy']); //funcion
 
 Route::get('Edit-Breed/{id}', [BreedsController::class, 'show']); // Mostrar ventana modal edit con datos actuales
 
-Route::put('Update-Breed/{id}', [BreedsController::class, 'update']); // Accion de actualizar como tal con los datos nuevos que envia el usuario
+Route::put('Update-Breed/{id}', [BreedsController::class, 'update']); // Accion de actualizar como tal con datos nuevos que envia el usuario
+
+// COLORS / COLORES
+Route::get('Colors',[ColorsController::class, 'index']); // Vista principal del module.colros
+
+Route::post('Colors',[ColorsController::class, 'store']); // method=post del new-modal-colors
+
+Route::get('Delete-Color/{id}', [ColorsController::class, 'destroy']); //funcion ejecutada al confirmar la accion en template.blade.php
+
+Route::get('Edit-Color/{id}', [ColorsController::class, 'show']); // Mostrar ventana modal edit con datos actuales
+
+Route::put('Update-Color/{id}', [ColorsController::class, 'update']); //Accion de actualizar como tal, con datos nuevos que envia el usuario

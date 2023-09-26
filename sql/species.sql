@@ -1,0 +1,15 @@
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Perros');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Gatos');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Aves');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Conejos');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Roedores');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Reptiles');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Peces');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Caballos');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Ganado Vacuno');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Ovejas');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Cabras');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Cerdos');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Aves de Corral');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Ganado Equino');
+INSERT INTO `species` (`id`, `name`) VALUES (NULL, 'Animales Exóticos');

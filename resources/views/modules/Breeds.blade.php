@@ -87,7 +87,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Guardar</button>
 
                 </div>
             </form>

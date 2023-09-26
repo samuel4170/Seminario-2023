@@ -187,6 +187,11 @@
             // Esta funcion recibe una ruta y el id del registro del boton que fue clickeado para confirmar la eliminacion
             templateConfirmDeleteMessage("Delete-Breed/" + $(this).attr('BreedId'));
         })
+        // Ventana interactiva para eliminar registro de @colores
+        $('.table').on('click', '.btn-delete-color', function(){
+            // Esta funcion recibe una ruta y el id del registro del boton que fue clickeado para confirmar la eliminacion
+            templateConfirmDeleteMessage("Delete-Color/" + $(this).attr('ColorId'));
+        })
     </script>
 
     {{-- Se desmenuza la url gestionada por $_SEVER para validar las peticiones de edicion --}}
@@ -222,6 +227,22 @@
     {{-- Es necesario @volver_atras, si el usuario abre la ventana de edicion pero no edita el registro como tal --}}
     <script>
         $('#edit-modal-breed').on('hidden.bs.modal', function (e) {
+            history.back();
+        });
+    </script>
+
+    {{-- Cuando la URL tenga "Edit-Color", hay intencion de edicion  --}}
+    {{-- Se muestra el Modal con los datos actuales basados en el ID @Color --}}
+    @if($exp[3] == 'Edit-Color')
+        <script type="text/javascript">
+            $(document).ready(()=>{
+                $('#edit-modal-color').modal('toggle');
+            })
+        </script>
+    @endif
+    {{-- Es necesario @volver_atras, si el usuario abre la ventana de edicion pero no edita el registro como tal --}}
+    <script>
+        $('#edit-modal-color').on('hidden.bs.modal', function (e) {
             history.back();
         });
     </script>
