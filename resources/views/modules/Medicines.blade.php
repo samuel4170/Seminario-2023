@@ -80,7 +80,7 @@
                 </div>
                 <div class="form-group">
                     <label for="price" class="form-label">Precio:</label>
-                    <input type="number" name="price" id="price" class="form-control" required value="{{ old('price') }}">
+                    <input type="text" name="price" id="price" class="form-control" required value="{{ old('price') }}" placeholder="0.00">
                     <small id="priceHelp" class="form-text text-muted">Digite el precio del medicamento en Quetzales</small>
                     @error('price')
                         <div class="alert alert-danger">Debes especificar el precio correctamente.</div>

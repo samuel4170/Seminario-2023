@@ -75,12 +75,12 @@
                     <input type="text" name="name" id="name" class="form-control" required value="{{ $medicineX -> name }}">
                     <small id="nameHelp" class="form-text text-muted">¿Cómo vas a identificar este medicamento a partir de ahora?</small>
                     @error('name')
-                        <div class="alert alert-danger">Es posible que ya exista un medicamento registrado de esta manera en el sistema.</div>
+                        <div class="alert alert-danger">Ya exisre un medicamento con el nombre '{{ old('name')}}'</div>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="price" class="form-label">Precio:</label>
-                    <input type="number" name="price" id="price" class="form-control" required value="{{ $medicineX -> price }}">
+                    <input type="text" name="price" id="price" class="form-control" required value="{{ $medicineX -> price }}" placeholder="0.00">
                     <small id="priceHelp" class="form-text text-muted">Digite el nuevo precio del medicamento en Quetzales</small>
                     @error('price')
                         <div class="alert alert-danger">Debes especificar el precio correctamente.</div>
