@@ -1,5 +1,5 @@
 <header class="main-header">
-    <a href="{{ url('Start') }}" class="logo">
+    <a href="{{ url('Start') }}" class="logo" style="position: fixed;">
         <span class="logo-mini"><b>CGT</b></span>
         <span class="logo-lg"><b>CITAGROVET</b></span>
     </a>

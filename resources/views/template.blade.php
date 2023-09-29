@@ -34,6 +34,26 @@
         select:hover{
             cursor: pointer;
         }
+        .submenu-item, .dropdown-menu {
+            background-color: #222D32; /* Establece el color de fondo deseado */
+            color: #fff; /* Establece el color del texto si es necesario */
+        }
+        .dropdown-menu{
+            width:99.7%;
+            position: relative;
+            top:-8px;
+        }
+        .fixed-menu {
+            position: fixed;
+            top: 0; /* Puedes ajustar la posición superior según tu diseño */
+            left: 0; /* Puedes ajustar la posición izquierda según tu diseño */
+            background-color: #fff; /* Puedes establecer el color de fondo que desees */
+            /* Otros estilos y propiedades personalizados según tus necesidades */
+        }
+        .optional-field-style{
+            display: flex;
+            flex-direction: row;
+        }
     </style>
 </head>
 
@@ -118,6 +138,16 @@
             )
         </script>
     @endif
+    {{-- Mensaje de oepraciones de @registro fallida --}}
+    @if(session('registered_unsuccessfully'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No fue posible REGISTRAR los datos.'
+            })
+        </script>
+    @endif
     {{-- Mensaje de operaciones de @eliminacion exitosa --}}
     @if(session('delete_successfully'))
         <script>
@@ -148,6 +178,16 @@
             )
         </script>
     @endif
+    {{-- Mensaje de operaciones de @actualizacion fallida --}}
+    @if(session('update_unsuccessfully'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No fue posible ACTUALIZAR este registro.'
+            })
+        </script>
+    @endif
     <script>
         //Template para mensajes de eliminar registros
         function templateConfirmDeleteMessage($path){
@@ -157,9 +197,10 @@
                 icon: 'warning',
                 showDenyButton: true,
                 denyButtonText: 'Cancelar',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar'
+                focusDeny: true, //enfoca el boton cancelar por defecto
+                confirmButtonColor: '#bbb',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
             }).then((result)=>{
                 if(result.isConfirmed){
                     window.location = $path;
@@ -196,6 +237,11 @@
         $('.table').on('click', '.btn-delete-medicine', function(){
             // Esta funcion recibe una ruta y el id del registro del boton que fue clickeado para confirmar la eliminacion
             templateConfirmDeleteMessage("Delete-Medicine/" + $(this).attr('MedicineId'));
+        })
+        // Ventana interactiva para eliminar registro de @mascotas
+        $('.table').on('click', '.btn-delete-pet', function(){
+            // Esta funcion recibe una ruta y el id del registro del boton que fue clickeado para confirmar la eliminacion
+            templateConfirmDeleteMessage("Delete-Pet/" + $(this).attr('PetId'));
         })
     </script>
 
@@ -268,6 +314,37 @@
         });
     </script>
 
+    {{-- Cuando la URL tenga "Edit-Pet", hay intencion de edicion  --}}
+    {{-- Se muestra el Modal con los datos actuales basados en el ID @Pet --}}
+    @if($exp[3] == 'Edit-Pet')
+        <script type="text/javascript">
+            $(document).ready(()=>{
+                $('#edit-modal-pet').modal('toggle');
+            })
+        </script>
+    @endif
+    {{-- Es necesario @volver_atras, si el usuario abre la ventana de edicion pero no edita el registro como tal --}}
+    <script>
+        $('#edit-modal-pet').on('hidden.bs.modal', function (e) {
+            history.back();
+        });
+    </script>
+
+    {{-- Cuando la URL tenga "Edit-Pet-Inactive", hay intencion de edicion  --}}
+    {{-- Se muestra el Modal con los datos actuales basados en el ID @Pet --}}
+    @if($exp[3] == 'Edit-Pet-Inactive')
+        <script type="text/javascript">
+            $(document).ready(()=>{
+                $('#edit-modal-pet').modal('toggle');
+            })
+        </script>
+    @endif
+    {{-- Es necesario @volver_atras, si el usuario abre la ventana de edicion pero no edita el registro como tal --}}
+    <script>
+        $('#edit-modal-pet').on('hidden.bs.modal', function (e) {
+            history.back();
+        });
+    </script>
 </body>
 
 </html>

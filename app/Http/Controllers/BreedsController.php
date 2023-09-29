@@ -29,9 +29,9 @@ class BreedsController extends Controller
             return redirect('Start'); //Si el rol del usuaario no es de administrador o secretaria, se le redirecciona
         }
         // Traer los datos necesarios para crear un registro
-        $species = Species::all();
+        $species = Species::orderBy('name', 'desc')->get();
         // Trea los datos necesarios para mostrar los registrados
-        $breeds = Breeds::all();
+        $breeds = Breeds::orderBy('name', 'asc')->get();
         //Si es un usuario que debe de tener acceso al modulo, entonces retornar la vista correspondiente
         return view('modules.Breeds', compact('species', 'breeds'));
     }
@@ -116,7 +116,12 @@ class BreedsController extends Controller
                 'id_specie' => ['required'],
                 'name' => ['required', 'string', 'min:3', 'unique:breeds'],
             ]);
-            DB::table('breeds')->where('id', $id['id'])->update(['name' => $data['name'], 'id_specie' => $data['id_specie']]);
+            DB::table('breeds')
+            ->where('id', $id['id'])
+            ->update([
+            'name' => $data['name'],
+            'id_specie' => $data['id_specie']
+            ]);
         }
         return redirect('Breeds')->with('update_successfully', 'true');
     }
@@ -139,4 +144,13 @@ class BreedsController extends Controller
             return redirect('Breeds')->with('delete_unsuccessfully', 'true');
         }
     }
+
+    // Realiza una consulta en la base de datos para obtener las razas correspondientes a la especie seleccionada
+    public function getBreedsSpecie($id) {
+        $breeds_specie = Breeds::where('id_specie', $id)
+            ->orderBy('name', 'asc') // Ordenar por nombre en orden ascendente
+            ->get();
+        return response()->json($breeds_specie);
+    }
+
 }
