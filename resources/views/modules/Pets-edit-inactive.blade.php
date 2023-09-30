@@ -2,19 +2,13 @@
 @section('content-logged-in')
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>Mascotas</h1>
+        <h1>Mascotas Inactivas</h1>
     </section>
     <section class="content">
         <div class="box">
             <div class="box-header">
                 <!-- Button trigger modal -->
-                <button
-                    type="button"
-                    class="btn btn-primary btn-lg"
-                    data-toggle="modal"
-                    data-target="#new-modal-pet">
-                    <i class="fa fa-plus-circle"></i> Nuevo Registro
-                </button>
+                {{-- Modulo Inactive NO tiene boton de registro --}}
             </div>
             <div class="box-body">
                 <table class="table table-bordered table-hover table-striped dt-responsive">
@@ -60,11 +54,14 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ url('Edit-Pet/' . $pet -> id ) }}">
+                                    <a href="{{ url('Edit-Pet-Inactive/' . $pet -> id ) }}">
                                         <button class="btn btn-success" title="Actualizar datos de la mascota">
                                             <i class="fa fa-pencil"></i>
                                         </button>
                                     </a>
+                                    <button class="btn btn-danger btn-delete-pet" PetId="{{ $pet -> id }}" title="Eliminar datos de la Mascota">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -74,7 +71,7 @@
     </section>
 </div>
 {{-- Modal Edit --}}
-<div class="modal fade" id="edit-modal-pet" tabindex="-1" aria-labelledby="edit-label-pet">
+<div class="modal fade" id="edit-modal-pet-inactive" tabindex="-1" aria-labelledby="edit-label-pet">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
@@ -82,7 +79,7 @@
             <h4 class="modal-title" id="edit-label-pet"><i class="fa fa-plus-circle"></i> Actualizar Mascota</h4>
         </div>
         <div class="modal-body">
-            <form method="post" autocomplete="off" action="{{ url('Update-Pet/'. $petX -> id) }}">
+            <form method="post" autocomplete="off" action="{{ url('Update-Pet-Inactive/'. $petX -> id) }}">
                 @csrf
                 @method('put')
                 <div class="form-group">
@@ -135,7 +132,7 @@
                 </div>
                 <div class="form-group">
                     <label for="id_breed" class="form-label">Raza:</label>
-                    <select name="id_breed" id="id_breed" class="form-control" required>
+                    <select name="id_breed" id="id_breed" class="form-control" required disabled>
                         <!-- Las opciones de raza se cargarán dinámicamente aquí si se cambia de especie -->
                     </select>
                     <small id="id_breedHelp" class="form-text text-muted">¿Cuál es la raza de la mascota?</small>

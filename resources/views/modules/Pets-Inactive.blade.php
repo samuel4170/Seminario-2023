@@ -118,30 +118,6 @@
         });
     });
 </script>
-{{-- Script para mostrar de una forma más amigable la fecha de nacimiento de la mascota --}}
-<script>
-    // Obtener el elemento input y el div donde se mostrará la fecha formateada
-    let inputDate = document.getElementById('birthdate');
-    let birthdateHelp = document.getElementById('birthdateHelp');
-
-    // Agregar un evento de cambio al elemento input
-    inputDate.addEventListener('change', function() {
-        // Definir los nombres de los meses
-        let month = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-        selectedDate = new Date(this.value);
-
-        // Desmenuzar la fecha
-        selectedDay = selectedDate.getDate() + 1; //Validar si en el lado del cliente hay que agregarle o no un uno.
-        selectedMonth = month[selectedDate.getMonth()];
-        selectedYear = selectedDate.getFullYear();
-
-        // Formatear la fecha en el formato deseado
-        let formatedDate = selectedDay + ' de ' + selectedMonth + ' de ' + selectedYear;
-
-        // Mostrar la fecha formateada en el elemento help
-        birthdateHelp.textContent = formatedDate;
-    });
-</script>
 {{-- Scrip para mostrar dinamicamente los campos opcinales: correo del cliente y detalles adicinales mascota --}}
 <script>
     $(document).ready(function() {

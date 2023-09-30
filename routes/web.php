@@ -115,3 +115,5 @@ Route::get('Edit-Pet/{id}', [PetsController::class, 'show']); // Mostrar ventana
 Route::get('Edit-Pet-Inactive/{id}', [PetsController::class, 'showInactive']); // Mostrar ventana modal edit con datos actuales
 
 Route::put('Update-Pet/{id}', [PetsController::class, 'update']); //Accion de actualizar como tal, con datos nuevos que envia el usuario
+
+Route::put('Update-Pet-Inactive/{id}', [PetsController::class, 'updateInactive']); //Accion de actualizar como tal, con datos nuevos que envia el usuario

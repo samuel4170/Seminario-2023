@@ -335,13 +335,13 @@
     @if($exp[3] == 'Edit-Pet-Inactive')
         <script type="text/javascript">
             $(document).ready(()=>{
-                $('#edit-modal-pet').modal('toggle');
+                $('#edit-modal-pet-inactive').modal('toggle');
             })
         </script>
     @endif
     {{-- Es necesario @volver_atras, si el usuario abre la ventana de edicion pero no edita el registro como tal --}}
     <script>
-        $('#edit-modal-pet').on('hidden.bs.modal', function (e) {
+        $('#edit-modal-pet-inactive').on('hidden.bs.modal', function (e) {
             history.back();
         });
     </script>
