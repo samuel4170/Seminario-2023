@@ -25,14 +25,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Validator::extend('birthdate_not_future', function ($attribute, $value, $parameters, $validator) {
-            $birthdate = \Carbon\Carbon::parse($value);
+            $date = \Carbon\Carbon::parse($value);
             $currentDate = \Carbon\Carbon::now()->subDay(); // Resta un día a la fecha actual
 
-            return $birthdate <= $currentDate;
+            return $date <= $currentDate;
         });
 
         Validator::replacer('birthdate_not_future', function ($message, $attribute, $rule, $parameters) {
-            return str_replace(':attribute', $attribute, 'La fecha de nacimiento no puede ser en el futuro.');
+            return str_replace(':attribute', $attribute, 'La fecha no puede ser una fecha en el futuro.');
         });
     }
 }

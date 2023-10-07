@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentsPetController;
 use App\Http\Controllers\BreedsController;
 use App\Http\Controllers\ColorsController;
 use Illuminate\Support\Facades\Auth;
@@ -117,3 +118,10 @@ Route::get('Edit-Pet-Inactive/{id}', [PetsController::class, 'showInactive']); /
 Route::put('Update-Pet/{id}', [PetsController::class, 'update']); //Accion de actualizar como tal, con datos nuevos que envia el usuario
 
 Route::put('Update-Pet-Inactive/{id}', [PetsController::class, 'updateInactive']); //Accion de actualizar como tal, con datos nuevos que envia el usuario
+
+// APPOINTMENTS PET / REGISTRO DE CITAS DE VACUNACIÓN DE MASCOTAS
+Route::get('AppointmentsPet/{id}',[AppointmentsPetController::class, 'index']); // Vista principal del module.colros
+
+Route::post('AppointmentsPet/{id}',[AppointmentsPetController::class, 'store']); // method=post del new-modal-AppointmentsPet
+
+Route::get('AppointmentsPet/Delete-AppointmentsPet/{id}/{pet}', [AppointmentsPetController::class, 'destroy']); //funcion ejecutada al confirmar la accion en template.blade.php

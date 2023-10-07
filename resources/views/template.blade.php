@@ -1,3 +1,6 @@
+<?php
+date_default_timezone_set('America/Guatemala');
+?>
 <!DOCTYPE html>
 <html>
 
@@ -30,31 +33,8 @@
     <link rel="stylesheet" href="http://localhost/citagro_demo/public/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <style>
-        select:hover{
-            cursor: pointer;
-        }
-        .submenu-item, .dropdown-menu {
-            background-color: #222D32; /* Establece el color de fondo deseado */
-            color: #fff; /* Establece el color del texto si es necesario */
-        }
-        .dropdown-menu{
-            width:99.7%;
-            position: relative;
-            top:-8px;
-        }
-        .fixed-menu {
-            position: fixed;
-            top: 0; /* Puedes ajustar la posición superior según tu diseño */
-            left: 0; /* Puedes ajustar la posición izquierda según tu diseño */
-            background-color: #fff; /* Puedes establecer el color de fondo que desees */
-            /* Otros estilos y propiedades personalizados según tus necesidades */
-        }
-        .optional-field-style{
-            display: flex;
-            flex-direction: row;
-        }
-    </style>
+    {{-- Custom CSS --}}
+    <link rel="stylesheet" href="http://localhost/citagro_demo/public/dist/css/custom.css">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini login-page">
@@ -138,7 +118,7 @@
             )
         </script>
     @endif
-    {{-- Mensaje de oepraciones de @registro fallida --}}
+    {{-- Mensaje de operaciones de @registro fallida --}}
     @if(session('registered_unsuccessfully'))
         <script>
             Swal.fire({
@@ -242,6 +222,11 @@
         $('.table').on('click', '.btn-delete-pet', function(){
             // Esta funcion recibe una ruta y el id del registro del boton que fue clickeado para confirmar la eliminacion
             templateConfirmDeleteMessage("Delete-Pet/" + $(this).attr('PetId'));
+        })
+        // Ventana interactiva para eliminar registro de @historial de vacunacion de una mascota
+        $('.table').on('click', '.btn-delete-AppointmentPet', function(){
+            // Esta funcion recibe una ruta y el id del registro del boton que fue clickeado para confirmar la eliminacion
+            templateConfirmDeleteMessage("Delete-AppointmentsPet/" + $(this).attr('AppointmentPetId') + "/" + $(this).attr('PetId'));
         })
     </script>
 

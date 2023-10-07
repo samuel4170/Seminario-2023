@@ -1,0 +1,23 @@
+select:hover{
+    cursor: pointer;
+}
+.submenu-item, .dropdown-menu {
+    background-color: #222D32; /* Establece el color de fondo deseado */
+    color: #fff; /* Establece el color del texto si es necesario */
+}
+.dropdown-menu{
+    width:99.7%;
+    position: relative;
+    top:-8px;
+}
+.fixed-menu {
+    position: fixed;
+    top: 0; /* Puedes ajustar la posición superior según tu diseño */
+    left: 0; /* Puedes ajustar la posición izquierda según tu diseño */
+    background-color: #fff; /* Puedes establecer el color de fondo que desees */
+    /* Otros estilos y propiedades personalizados según tus necesidades */
+}
+.optional-field-style{
+    display: flex;
+    flex-direction: row;
+}
