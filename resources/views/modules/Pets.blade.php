@@ -356,13 +356,14 @@ $formattedsuggestedBirthDate = $suggestedBirthDate->format('Y-m-d');
         const selectedDate = new Date(date);
         selectedDate.setDate(selectedDate.getDate() + 1); // Suma un día a la fecha seleccionada, bug en servidor aparece un dia menos.
         const currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() + 1);
+        currentDate.setDate(currentDate.getDate());
         // Formatear ambas fechas como cadenas de texto con solo año, mes y día
         const selectedDateString = selectedDate.toLocaleDateString();
         const currentDateString = currentDate.toLocaleDateString();
         //console.log('valid_Date',selectedDateString, currentDateString);
         // Comparar las fechas y mostrar la alerta si la fecha seleccionada NO es menor o igual a la fecha actual
-        if (!(selectedDate <= currentDate)) {
+        //console.log('dates', selectedDateString, currentDateString);
+        if (!(selectedDate < currentDate)) {
             Swal.fire({
                 text: 'Por favor, indica la fecha de nacimiento correctamente',
                 icon: 'warning',
